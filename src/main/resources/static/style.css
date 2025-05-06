@@ -1,0 +1,291 @@
+/* Page d'accueil principale */
+body {
+    background: linear-gradient(120deg, #e3f0ff 0%, #f9f9f9 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+.main-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-card, .register-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(25, 118, 210, 0.08);
+    padding: 2.5rem 2rem;
+    min-width: 340px;
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.brand {
+    color: #1976d2;
+    font-weight: bold;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+.login-card h2, .register-card h2 {
+    color: #1976d2;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+}
+.role-select {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    justify-content: center;
+}
+.role-btn {
+    background: #e9ecef;
+    color: #1976d2;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.role-btn.active, .role-btn:hover {
+    background: #1976d2;
+    color: #fff;
+    transform: translateY(-1px);
+}
+.input-group {
+    display: flex;
+    align-items: center;
+    background: #f4f6f8;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    padding: 0.8rem 1rem;
+    border: 1px solid #e0e0e0;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+.input-group:focus-within {
+    border-color: #1976d2;
+    box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.1);
+}
+.input-group label {
+    color: #1976d2;
+    font-size: 1.1rem;
+    margin-right: 0.8rem;
+    width: 24px;
+    text-align: center;
+}
+.input-group input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 1rem;
+    padding: 0.5rem 0;
+    width: 100%;
+    color: #333;
+}
+.input-group input::placeholder {
+    color: #999;
+}
+.submit-btn {
+    background: none;
+    color: #1976d2;
+    border: 2px solid #1976d2;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+.submit-btn:hover {
+    background: #1976d2;
+    color: #fff;
+    transform: translateY(-1px);
+}
+.register-btn {
+    background: none;
+    color: #1976d2;
+    border: 2px solid #1976d2;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+.register-btn:hover {
+    background: #1976d2;
+    color: #fff;
+    transform: translateY(-1px);
+}
+.form-message {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: #d32f2f;
+    min-height: 1.2em;
+    text-align: center;
+    width: 100%;
+}
+/* Modal d'inscription */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background: rgba(25, 118, 210, 0.10);
+}
+.modal-content {
+    background: #fff;
+    margin: 6% auto;
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 370px;
+    box-shadow: 0 4px 24px rgba(25, 118, 210, 0.15);
+    position: relative;
+}
+.close {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 2rem;
+    color: #1976d2;
+    cursor: pointer;
+}
+#registerForm input {
+    margin-bottom: 1rem;
+    padding: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+#registerForm button {
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    padding: 0.7rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+#registerForm button:hover {
+    background: #125ea2;
+}
+@media (max-width: 500px) {
+    .login-card, .register-card {
+        padding: 1.5rem 1rem;
+        min-width: 90vw;
+    }
+    
+    .role-select {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .role-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Nouveaux styles pour améliorer l'apparence des champs de formulaire */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+    border: none;
+    background-color: #f9f9f9;
+    padding: 0.8rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+    width: 100%;
+    color: #333;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus {
+    box-shadow: 0 4px 8px rgba(25,118,210,0.3);
+    outline: none;
+}
+
+/* Nouveaux styles pour des champs de formulaire plus sophistiqués */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus {
+    border-color: #1976d2;
+    box-shadow: 0 0 8px rgba(25, 118, 210, 0.4);
+    outline: none;
+}
+
+/* Nouveaux styles pour des boutons uniques et sophistiqués */
+.submit-btn,
+.register-btn {
+    background: linear-gradient(45deg, #1976d2, #125ea2);
+    color: #fff;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+.submit-btn:hover,
+.register-btn:hover {
+    background: linear-gradient(45deg, #125ea2, #1976d2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.login-card .submit-btn {
+    /* Updated style to match the 'Créer un compte' button */
+    background: none;
+    color: #1976d2;
+    border: 2px solid #1976d2;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+.login-card .submit-btn:hover {
+    background: #1976d2;
+    color: #fff;
+    transform: translateY(-1px);
+}

@@ -1,6 +1,8 @@
 package com.service;
 
 import com.model.User;
+import com.repository.UserDAO;
+
 import java.util.List;
 
 public interface IUtilisateurService {
@@ -15,5 +17,5 @@ public interface IUtilisateurService {
     User updateUser(User user);
     void deleteUser(int id);
 
-    User authentifier ( String email , String motDePasse );
+    User authentifier(String email, String motDePasse);
 }
