@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillLink - Tableau de bord</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background: #f7f9fb; }
+        .dashboard-container { display: flex; min-height: 100vh; }
+        .sidebar { width: 220px; background: #fff; border-right: 1px solid #e0e0e0; padding: 2rem 1rem; }
+        .sidebar h2 { font-size: 1.3rem; margin-bottom: 2rem; color: #1976d2; }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar ul li { margin-bottom: 1.5rem; }
+        .sidebar ul li a { color: #333; text-decoration: none; font-size: 1.1rem; display: flex; align-items: center; gap: 0.7rem; transition: color 0.2s; }
+        .sidebar ul li a:hover, .sidebar ul li.active a { color: #1976d2; font-weight: 600; }
+        .main-content { flex: 1; padding: 2.5rem 3rem; }
+        .dashboard-header { display: flex; justify-content: flex-end; align-items: center; margin-bottom: 2rem; }
+        .user-header { display: flex; align-items: center; gap: 1rem; }
+        .user-header .profile-icon { 
+            width: 38px; 
+            height: 38px; 
+            border-radius: 50%; 
+            background: #e3e3e3; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1.3rem; 
+            color: #bdbdbd;
+            overflow: hidden;
+        }
+        .user-header .user-name { font-weight: 600; color: #1976d2; font-size: 1.08rem; }
+        .dashboard-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; }
+        .profile-card, .card { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(25,118,210,0.06); padding: 2rem; margin-bottom: 2rem; }
+        .profile-card { display: flex; align-items: center; gap: 2rem; grid-column: 1 / 2; }
+        .profile-avatar { 
+            width: 90px; 
+            height: 90px; 
+            border-radius: 50%; 
+            background: #e3e3e3; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 2.5rem; 
+            color: #bdbdbd;
+            overflow: hidden;
+        }
+        .profile-info h3 { margin: 0 0 0.5rem 0; font-size: 1.5rem; }
+        .profile-info p { margin: 0 0 0.7rem 0; color: #888; }
+        .profile-skills { margin-top: 1rem; }
+        .profile-skills .section-label { font-size: 0.98rem; color: #1976d2; font-weight: 600; margin-right: 0.7rem; }
+        .profile-skills .skills-container { margin-top: 0.5rem; }
+        .profile-skills span { display: inline-block; background: #e3f2fd; color: #1976d2; border-radius: 6px; padding: 0.3rem 0.8rem; margin-right: 0.5rem; margin-bottom: 0.3rem; font-size: 0.95rem; }
+        .profile-skills .learn { background: #e0f7fa; color: #0097a7; }
+        .profile-info .edit-link { color: #1976d2; font-size:0.98rem; margin-top:1rem; display:inline-block; text-decoration: underline; }
+        .section-title { font-size: 1.15rem; font-weight: 600; margin-bottom: 1rem; color: #1976d2; }
+        .card-list { margin: 0; padding: 0; list-style: none; }
+        .card-list li { margin-bottom: 1.1rem; }
+        .card-list .label { font-size: 0.95rem; color: #888; margin-right: 0.5rem; }
+        .card-list .value { font-weight: 500; }
+        .card-list .badge { background: #e0f7fa; color: #0097a7; border-radius: 5px; padding: 0.2rem 0.7rem; font-size: 0.9rem; margin-left: 0.5rem; }
+        .card-list .badge.teaching { background: #e3f2fd; color: #1976d2; }
+        .card-list .badge.learning { background: #e0f7fa; color: #0097a7; }
+        .card-list .msg-time { float: right; color: #bbb; font-size: 0.93rem; }
+        .card-list .star { color: #FFD600; font-size: 1.1rem; margin-right: 2px; }
+        .card-list .review-user { font-weight: 600; }
+        .card-list .review-text { color: #555; font-size: 0.98rem; margin-bottom: 0.2rem; }
+        .card-list .review-stars { margin-bottom: 0.2rem; }
+        .card-list .review { margin-bottom: 1.2rem; }
+        .card-list .review:last-child { margin-bottom: 0; }
+        .card-list .msg-user { font-weight: 600; }
+        .card-list .msg-dot { color: #1976d2; font-size: 1.1rem; margin-left: 3px; }
+        .card-list .msg-link { color: #1976d2; font-size: 0.98rem; text-decoration: underline; }
+        .dashboard-links { display: flex; justify-content: space-between; align-items: center; margin-top: 1.2rem; }
+        .dashboard-links a { color: #1976d2; font-size: 0.98rem; text-decoration: underline; }
+        @media (max-width: 1100px) { .dashboard-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 900px) { .main-content { padding: 1rem; } .sidebar { display: none; } }
+    </style>
+</head>
+<body>
+<div class="dashboard-container">
+    <nav class="sidebar">
+        <h2 style="color: #1976d2; font-weight: bold;">SkillLink</h2>
+        <ul>
+            <li class="active"><a href="#" style="color: #1976d2; font-weight: bold;"><span style="font-size: 1.3em;">🏠</span> Tableau de bord</a></li>
+            <li><a href="#"><span style="font-size: 1.3em;">🔍</span> Recherche de compétences</a></li>
+            <li><a href="marketplace.html"><span style="font-size: 1.3em;">🗂️</span> Marché des cours</a></li>
+            <li><a href="edit-profile.html"><span style="font-size: 1.3em;">⚙️</span> Paramètres du profil</a></li>
+            <li><a href="login.html"><span style="font-size: 1.3em;">📑</span> Déconnexion</a></li>
+        </ul>
+    </nav>
+    <div class="main-content">
+        <div class="dashboard-header">
+            <div class="user-header">
+                <span class="user-name" id="dashboardUserName">Alex Johnson</span>
+                <span class="profile-icon" id="dashboardHeaderAvatar">👤</span>
+            </div>
+        </div>
+        <div class="dashboard-grid">
+            <div>
+                <div class="profile-card">
+                    <div class="profile-avatar" id="dashboardAvatar">👤</div>
+                    <div class="profile-info">
+                        <h3 id="dashboardName">Alex Johnson</h3>
+                        <p id="dashboardJoin">Membre depuis 2023</p>
+                        <div class="profile-skills">
+                            <span class="section-label">COMPÉTENCES QUE J'OFFRE</span>
+                            <div id="offeredSkills" class="skills-container">
+                                <!-- Skills will be dynamically inserted here -->
+                            </div>
+                        </div>
+                        <div class="profile-skills">
+                            <span class="section-label">COMPÉTENCES QUE JE VEUX APPRENDRE</span>
+                            <div id="wantedSkills" class="skills-container">
+                                <!-- Skills to learn will be dynamically inserted here -->
+                            </div>
+                        </div>
+                        <a href="#" class="edit-link">Modifier le profil</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="section-title">Boîte de réception</div>
+                    <ul class="card-list">
+                        <li><span class="msg-user">Sarah Miller <span class="msg-dot">•</span></span> <span class="msg-time">10:30</span><br>Hâte à notre session de demain !</li>
+                        <li><span class="msg-user">David Chen</span> <span class="msg-time">Hier</span><br>Merci pour les documents Python que tu as partagés.</li>
+                        <li><span class="msg-user">Emma Wilson <span class="msg-dot">•</span></span> <span class="msg-time">Hier</span><br>Pouvons-nous reprogrammer notre atelier UI ?</li>
+                    </ul>
+                    <div class="dashboard-links"><a href="#">Ouvrir les messages</a></div>
+                </div>
+            </div>
+            <div>
+                <div class="card">
+                    <div class="section-title">Sessions à venir</div>
+                    <ul class="card-list">
+                        <li><span class="value">Bases de JavaScript</span> <span class="badge teaching">Enseignement</span><br><span class="label">Avec Sarah Miller</span> <br><span class="label">Lun, 15 mai, 14:00</span></li>
+                        <li><span class="value">Python pour débutants</span> <span class="badge learning">Apprentissage</span><br><span class="label">Avec David Chen</span> <br><span class="label">Mer, 17 mai, 10:00</span></li>
+                        <li><span class="value">Atelier UI Design</span> <span class="badge teaching">Enseignement</span><br><span class="label">Avec Emma Wilson</span> <br><span class="label">Sam, 20 mai, 15:30</span></li>
+                    </ul>
+                    <div class="dashboard-links"><a href="#">Voir toutes les sessions</a> <a href="#">Planifier une session</a></div>
+                </div>
+                <div class="card">
+                    <div class="section-title">Avis & Notes</div>
+                    <ul class="card-list">
+                        <li class="review">
+                            <div class="review-user">Michael Brown <span class="review-stars">★★★★★</span></div>
+                            <div class="review-text">Alex est un excellent professeur de JavaScript. Très patient et compétent.</div>
+                        </li>
+                        <li class="review">
+                            <div class="review-user">Lisa Wang <span class="review-stars">★★★★☆</span></div>
+                            <div class="review-text">Très bon pour expliquer les concepts React complexes simplement.</div>
+                        </li>
+                        <li class="review">
+                            <div class="review-user">James Peterson <span class="review-stars">★★★★★</span></div>
+                            <div class="review-text">M'a aidé à comprendre rapidement les principes du design UI. Je recommande !</div>
+                        </li>
+                    </ul>
+                    <div class="dashboard-links"><a href="#">Voir tous les avis</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="dashboard.js"></script>
+</body>
+</html> 

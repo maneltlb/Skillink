@@ -1,7 +1,5 @@
 package com;
 
-import com.model.User;
-import com.service.UtilisateurService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;

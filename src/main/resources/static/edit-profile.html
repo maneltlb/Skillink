@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier le profil - SkillLink</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background: #fafbfc; }
+        .edit-profile-container { max-width: 800px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(25,118,210,0.07); padding: 2.5rem 2.5rem 2rem 2.5rem; }
+        .edit-profile-container h1 { font-size: 2rem; margin-bottom: 1.5rem; }
+        .edit-profile-container h2 { font-size: 1.2rem; margin: 2.2rem 0 1rem 0; color: #1976d2; }
+        .edit-profile-container label { font-weight: 500; margin-bottom: 0.3rem; display: block; }
+        .edit-profile-container input, .edit-profile-container textarea, .edit-profile-container select {
+            width: 100%; padding: 0.7rem; border: 1px solid #e0e0e0; border-radius: 7px; margin-bottom: 1.2rem; font-size: 1rem; background: #f7f9fb;
+        }
+        .edit-profile-container textarea { min-height: 70px; resize: vertical; }
+        .edit-profile-container .form-row { display: flex; gap: 1.5rem; }
+        .edit-profile-container .form-row > div { flex: 1; }
+        .edit-profile-container .skills-section { margin-top: 2.5rem; }
+        .edit-profile-container .skills-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        .edit-profile-container .skills-table th, .edit-profile-container .skills-table td { padding: 0.7rem 0.5rem; border-bottom: 1px solid #f0f0f0; text-align: left; }
+        .edit-profile-container .skills-table th { color: #1976d2; font-size: 1rem; }
+        .edit-profile-container .skills-table td select { width: auto; }
+        .edit-profile-container .skills-table .actions { min-width: 110px; }
+        .edit-profile-container .add-skill-row { display: flex; gap: 1rem; margin-bottom: 1.2rem; }
+        .edit-profile-container .add-skill-row input, .edit-profile-container .add-skill-row select { margin-bottom: 0; }
+        .edit-profile-container .add-skill-row button { background: #1976d2; color: #fff; border: none; border-radius: 6px; padding: 0 1.1rem; font-size: 1.5rem; cursor: pointer; }
+        .edit-profile-container .save-btn { background: #1976d2; color: #fff; border: none; border-radius: 8px; padding: 0.9rem 2.2rem; font-size: 1.1rem; font-weight: 600; margin-top: 2.2rem; float: right; display: flex; align-items: center; gap: 0.7rem; cursor: pointer; transition: background 0.2s; }
+        .edit-profile-container .save-btn:hover { background: #1256a3; }
+        .edit-profile-container .back-link { color: #1976d2; text-decoration: underline; margin-bottom: 1.5rem; display: inline-block; }
+        .edit-profile-container .error { color: #d32f2f; font-size: 0.98rem; margin-bottom: 1rem; }
+        .edit-profile-container .actions a { color: #1976d2; margin-right: 1.2rem; cursor: pointer; text-decoration: underline; font-size: 0.98rem; }
+        .edit-profile-container .actions a.remove { color: #d32f2f; margin-right: 0; }
+        @media (max-width: 700px) {
+            .edit-profile-container { padding: 1rem; }
+            .edit-profile-container .form-row { flex-direction: column; gap: 0; }
+        }
+    </style>
+</head>
+<body>
+<div class="edit-profile-container">
+    <a href="dashboard.html" class="back-link">&larr; Retour au tableau de bord</a>
+    <h1>Modifier le profil</h1>
+    <form id="editProfileForm" autocomplete="off">
+        <h2>Informations personnelles</h2>
+        <div class="form-row">
+            <div style="flex:0 0 120px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:0.5rem;">
+                <img id="profilePhotoPreview" src="" alt="Photo de profil" style="width:90px;height:90px;border-radius:50%;object-fit:cover;background:#e3e3e3;">
+                <input type="file" id="profilePhoto" accept="image/*" style="margin-top:0.5rem;">
+            </div>
+            <div style="flex:1;">
+                <label for="fullName">Nom complet *</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+            <div style="flex:1;">
+                <label for="email">Adresse e-mail *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div>
+                <label for="phone">Numéro de téléphone *</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+        </div>
+        <div>
+            <label for="bio">Bio</label>
+            <textarea id="bio" name="bio" placeholder="Brève description pour votre profil. Cela aidera les autres à mieux vous connaître."></textarea>
+        </div>
+        <h2>Compétences</h2>
+        <div>Ajoutez les compétences que vous possédez et souhaitez partager avec les autres.</div>
+        <div class="add-skill-row">
+            <input type="text" id="newSkillName" placeholder="Ajouter une compétence...">
+            <select id="newSkillLevel">
+                <option value="Beginner">Débutant</option>
+                <option value="Intermediate">Intermédiaire</option>
+                <option value="Advanced">Avancé</option>
+            </select>
+            <button type="button" id="addSkillBtn">+</button>
+        </div>
+        <table class="skills-table">
+            <thead>
+                <tr>
+                    <th>COMPÉTENCE</th>
+                    <th>NIVEAU</th>
+                    <th class="actions">ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody id="skillsTableBody">
+                <!-- Les compétences seront insérées dynamiquement ici -->
+            </tbody>
+        </table>
+        <button type="submit" class="save-btn"><span class="fa fa-save"></span> Sauvegarder</button>
+        <div id="formError" class="error"></div>
+    </form>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+<script src="edit-profile.js"></script>
+</body>
+</html> 

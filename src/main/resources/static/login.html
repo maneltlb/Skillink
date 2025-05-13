@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skillink - Connexion</title>
+    <link rel="stylesheet" href="style.css?v=1.1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="main-container" style="display: flex; min-height: 100vh; align-items: center; justify-content: center;">
+    <div class="welcome-section" style="flex: 1; padding: 2rem 2rem 2rem 4rem; max-width: 600px;">
+        <h1>Bienvenue sur <span class="brand">Skillink</span></h1>
+        <p>La plateforme qui connecte les compétences et les talents pour apprendre, partager et évoluer ensemble.</p>
+        <img src="https://img.icons8.com/color/96/000000/idea-sharing.png" alt="Skillink" class="illustration">
+    </div>
+    <div class="login-card" style="flex: 1; margin-left: 2rem; min-width: 340px; max-width: 400px;">
+        <h2 class="brand"><i class="fa-solid fa-link"></i> Skillink</h2>
+        <h2>Connexion</h2>
+        <div class="role-select" style="margin-bottom: 1.5rem;">
+            <button id="userRole" class="role-btn active"><i class="fa-solid fa-user"></i> Utilisateur</button>
+            <button id="adminRole" class="role-btn"><i class="fa-solid fa-user-shield"></i> Admin</button>
+        </div>
+        <form id="loginForm" autocomplete="off">
+            <div class="input-group">
+                <label for="loginEmail"><i class="fa-solid fa-envelope"></i></label>
+                <input type="email" id="loginEmail" placeholder="Email" required title="Saisissez votre email" autocomplete="off">
+            </div>
+            <div class="input-group">
+                <label for="loginPassword"><i class="fa-solid fa-lock"></i></label>
+                <input type="password" id="loginPassword" placeholder="Mot de passe" required minlength="6" title="Saisissez votre mot de passe" autocomplete="off">
+            </div>
+            <button type="submit" class="submit-btn">Se connecter</button>
+            <div class="form-message" id="loginMessage"></div>
+        </form>
+        <a href="register.html" class="register-btn" style="display:block; text-align:center; margin-top:1rem;">Créer un compte</a>
+    </div>
+</div>
+<script src="login.js"></script>
+</body>
+</html> 

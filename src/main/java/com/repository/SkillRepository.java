@@ -2,8 +2,9 @@ package com.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import java.util.List;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserDAO, Integer> {
-    UserDAO findByEmail(String email);
+public interface SkillRepository extends JpaRepository<SkillDAO, Integer> {
+    List<SkillDAO> findByUserId(int userId);
 } 

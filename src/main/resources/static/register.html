@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skillink - Register</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="main-container">
+    <div class="register-card">
+        <h1 class="brand"><i class="fa-solid fa-link"></i> Skillink</h1>
+        <h2>Create your account</h2>
+        <form id="registerForm">
+            <div class="input-group">
+                <label for="registerName"><i class="fa-solid fa-user"></i></label>
+                <input type="text" id="registerName" placeholder="Full Name" required title="Enter your full name">
+            </div>
+            <div class="input-group">
+                <label for="registerPrenom"><i class="fa-solid fa-user"></i></label>
+                <input type="text" id="registerPrenom" placeholder="Prénom" required title="Entrez votre prénom">
+            </div>
+            <div class="input-group">
+                <label for="registerEmail"><i class="fa-solid fa-envelope"></i></label>
+                <input type="email" id="registerEmail" placeholder="Email" required title="Enter your email address">
+            </div>
+            <div class="input-group">
+                <label for="registerPassword"><i class="fa-solid fa-lock"></i></label>
+                <input type="password" id="registerPassword" placeholder="Password" required minlength="6" title="Password must be at least 6 characters">
+            </div>
+            <div class="input-group">
+                <label for="registerConfirm"><i class="fa-solid fa-lock"></i></label>
+                <input type="password" id="registerConfirm" placeholder="Confirm Password" required minlength="6" title="Repeat your password">
+            </div>
+            <div class="input-group">
+                <label for="registerPhone"><i class="fa-solid fa-phone"></i></label>
+                <input type="tel" id="registerPhone" placeholder="Phone (optional)" title="Enter your phone number (optional)">
+            </div>
+            <div class="input-group">
+                <label for="registerAddress"><i class="fa-solid fa-location-dot"></i></label>
+                <input type="text" id="registerAddress" placeholder="Address (optional)" title="Enter your address (optional)">
+            </div>
+            <div class="input-group">
+                <label for="registerBio"><i class="fa-solid fa-pen"></i></label>
+                <input type="text" id="registerBio" placeholder="Biographie" title="Entrez votre biographie">
+            </div>
+            <div class="input-group">
+                <label for="registerPhoto"><i class="fa-solid fa-image"></i></label>
+                <input type="file" id="registerPhoto" accept="image/*" title="Importez votre photo de profil">
+            </div>
+            <div class="input-group">
+                <label for="registerDateNaissance"><i class="fa-solid fa-calendar"></i></label>
+                <input type="date" id="registerDateNaissance" placeholder="Date de naissance" title="Entrez votre date de naissance">
+            </div>
+            <button type="submit" class="submit-btn">Register</button>
+            <div class="form-message" id="registerMessage"></div>
+        </form>
+        <a href="login.html" class="register-btn" style="margin-top:1.5rem; text-align:center;">Back to Login</a>
+    </div>
+</div>
+<script src="register.js"></script>
+</body>
+</html> 
