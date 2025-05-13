@@ -38,7 +38,7 @@ public class UtilisateurService implements IUtilisateurService {
             user.getPhotoDeProfil(),
             user.getTelephone(),
             user.getDateNaissance(),
-            false
+            user.getIs_admin()
         );
     }
 
@@ -54,6 +54,7 @@ public class UtilisateurService implements IUtilisateurService {
         user.setPhotoDeProfil(dao.getPhotoDeProfil());
         user.setTelephone(dao.getTelephone());
         user.setDateNaissance(dao.getDateNaissance());
+        user.setIs_admin(dao.getIs_admin());
         return user;
     }
 
@@ -76,7 +77,21 @@ public class UtilisateurService implements IUtilisateurService {
 
     @Override
     public User updateUser(User user) {
+        // First check if user exists
+        UserDAO existingUser = userRepository.findById(user.getId()).orElse(null);
+        if (existingUser == null) {
+            return null;
+        }
+        
+        // Create new DAO with updated fields
         UserDAO userdao = toDAO(user);
+        
+        // Preserve the password if not provided in the update
+        if (user.getMotDePasse() == null || user.getMotDePasse().isEmpty()) {
+            userdao.setMotDePasse(existingUser.getMotDePasse());
+        }
+        
+        // Save the updated user
         userRepository.save(userdao);
         return toDTO(userdao);
     }

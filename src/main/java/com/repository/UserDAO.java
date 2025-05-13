@@ -33,10 +33,10 @@ public class UserDAO {
     @Column(name = "date_naissance")
     private String dateNaissance;
     
-    @Column
-    private Boolean isAdmin = false;
+    @Column(name = "is_admin", nullable = false)
+    private Boolean is_admin = false;
 
-    public UserDAO(int id, String nom, String prenom, String email, String motDePasse, String biographie, String photoDeProfil, String telephone, String dateDeNaissance , Boolean isAdmin ) {
+    public UserDAO(int id, String nom, String prenom, String email, String motDePasse, String biographie, String photoDeProfil, String telephone, String dateDeNaissance, Boolean is_admin) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -45,10 +45,12 @@ public class UserDAO {
         this.biographie = biographie;
         this.photoDeProfil = photoDeProfil;
         this.telephone = telephone;
-        this.dateNaissance=dateDeNaissance;
-        this.isAdmin = isAdmin;
+        this.dateNaissance = dateDeNaissance;
+        this.is_admin = is_admin != null ? is_admin : false;
     }
-    public UserDAO(){
+
+    public UserDAO() {
+        this.is_admin = false;
     }
 
     public int getId() {
@@ -121,5 +123,13 @@ public class UserDAO {
 
     public void setDateNaissance(String dateNaissance) {
         this.dateNaissance = dateNaissance;
+    }
+
+    public Boolean getIs_admin() {
+        return is_admin;
+    }
+
+    public void setIs_admin(Boolean is_admin) {
+        this.is_admin = is_admin != null ? is_admin : false;
     }
 }

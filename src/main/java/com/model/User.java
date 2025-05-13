@@ -10,8 +10,9 @@ public class User {
     private String photoDeProfil;
     private String telephone;
     private String dateNaissance;
+    private Boolean is_admin = false;
 
-    public User(int id, String nom, String prenom, String email, String motDePasse, String biographie, String photoDeProfil) {
+    public User(int id, String nom, String prenom, String email, String motDePasse, String biographie, String photoDeProfil, String telephone, String dateNaissance, Boolean is_admin) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -19,8 +20,14 @@ public class User {
         this.motDePasse = motDePasse;
         this.biographie = biographie;
         this.photoDeProfil = photoDeProfil;
+        this.telephone = telephone;
+        this.dateNaissance = dateNaissance;
+        this.is_admin = is_admin != null ? is_admin : false;
     }
-    public User (){}
+
+    public User() {
+        this.is_admin = false;
+    }
 
     public int getId() { return id; }
     public String getNom() { return nom; }
@@ -31,6 +38,7 @@ public class User {
     public String getPhotoDeProfil() { return photoDeProfil; }
     public String getTelephone() { return telephone; }
     public String getDateNaissance() { return dateNaissance; }
+    public Boolean getIs_admin() { return is_admin; }
 
     public void setId(int id) { this.id = id; }
     public void setNom(String nom) { this.nom = nom; }
@@ -41,4 +49,5 @@ public class User {
     public void setPhotoDeProfil(String photoDeProfil) { this.photoDeProfil = photoDeProfil; }
     public void setTelephone(String telephone) { this.telephone = telephone; }
     public void setDateNaissance(String dateNaissance) { this.dateNaissance = dateNaissance; }
+    public void setIs_admin(Boolean is_admin) { this.is_admin = is_admin != null ? is_admin : false; }
 }

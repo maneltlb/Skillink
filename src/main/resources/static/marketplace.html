@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Course Marketplace</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="marketplace.css">
+</head>
+<body>
+<div class="dashboard-container">
+  <nav class="sidebar">
+    <h2 style="color: #1976d2; font-weight: bold;">SkillLink</h2>
+    <ul>
+      <li><a href="dashboard.html" style="color: #1976d2; font-weight: bold;"><span style="font-size: 1.3em;">🏠</span> Tableau de bord</a></li>
+      <li><a href="#"><span style="font-size: 1.3em;">🔍</span> Recherche de compétences</a></li>
+      <li class="active"><a href="marketplace.html" style="color: #1976d2; font-weight: bold;"><span style="font-size: 1.3em;">🗂️</span> Marché des cours</a></li>
+      <li><a href="edit-profile.html"><span style="font-size: 1.3em;">⚙️</span> Paramètres du profil</a></li>
+      <li><a href="login.html"><span style="font-size: 1.3em;">📑</span> Déconnexion</a></li>
+    </ul>
+  </nav>
+  <div class="main-content">
+    <header>
+      <h1>Course Marketplace</h1>
+      <button id="create-listing-btn">+ Create New Listing</button>
+    </header>
+    <section class="controls">
+      <input type="text" id="search-bar" placeholder="Search courses, skills, or keywords...">
+      <select id="category-filter">
+        <option value="">All Categories</option>
+      </select>
+      <select id="sort-dropdown">
+        <option value="newest">Newest First</option>
+        <option value="oldest">Oldest First</option>
+        <option value="rating">Highest Rated</option>
+      </select>
+    </section>
+    <main id="course-grid">
+      <!-- Course cards will be injected here by JS -->
+    </main>
+    <button id="load-more-btn">Load More</button>
+  </div>
+</div>
+<script src="marketplace.js"></script>
+</body>
+</html> 

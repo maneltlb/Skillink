@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkillLink - Dashboard</title>
+    <title>SkillLink - Tableau de bord</title>
     <link rel="stylesheet" href="style.css">
     <style>
         body { background: #f7f9fb; }
@@ -17,16 +17,39 @@
         .main-content { flex: 1; padding: 2.5rem 3rem; }
         .dashboard-header { display: flex; justify-content: flex-end; align-items: center; margin-bottom: 2rem; }
         .user-header { display: flex; align-items: center; gap: 1rem; }
-        .user-header .profile-icon { width: 38px; height: 38px; border-radius: 50%; background: #e3e3e3; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: #bdbdbd; }
+        .user-header .profile-icon { 
+            width: 38px; 
+            height: 38px; 
+            border-radius: 50%; 
+            background: #e3e3e3; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1.3rem; 
+            color: #bdbdbd;
+            overflow: hidden;
+        }
         .user-header .user-name { font-weight: 600; color: #1976d2; font-size: 1.08rem; }
         .dashboard-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; }
         .profile-card, .card { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(25,118,210,0.06); padding: 2rem; margin-bottom: 2rem; }
         .profile-card { display: flex; align-items: center; gap: 2rem; grid-column: 1 / 2; }
-        .profile-avatar { width: 90px; height: 90px; border-radius: 50%; background: #e3e3e3; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: #bdbdbd; }
+        .profile-avatar { 
+            width: 90px; 
+            height: 90px; 
+            border-radius: 50%; 
+            background: #e3e3e3; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 2.5rem; 
+            color: #bdbdbd;
+            overflow: hidden;
+        }
         .profile-info h3 { margin: 0 0 0.5rem 0; font-size: 1.5rem; }
         .profile-info p { margin: 0 0 0.7rem 0; color: #888; }
         .profile-skills { margin-top: 1rem; }
         .profile-skills .section-label { font-size: 0.98rem; color: #1976d2; font-weight: 600; margin-right: 0.7rem; }
+        .profile-skills .skills-container { margin-top: 0.5rem; }
         .profile-skills span { display: inline-block; background: #e3f2fd; color: #1976d2; border-radius: 6px; padding: 0.3rem 0.8rem; margin-right: 0.5rem; margin-bottom: 0.3rem; font-size: 0.95rem; }
         .profile-skills .learn { background: #e0f7fa; color: #0097a7; }
         .profile-info .edit-link { color: #1976d2; font-size:0.98rem; margin-top:1rem; display:inline-block; text-decoration: underline; }
@@ -57,13 +80,13 @@
 <body>
 <div class="dashboard-container">
     <nav class="sidebar">
-        <h2>SkillLink</h2>
+        <h2 style="color: #1976d2; font-weight: bold;">SkillLink</h2>
         <ul>
-            <li class="active"><a href="#"><span>🏠</span> Dashboard</a></li>
-            <li><a href="#"><span>🔎</span> Skill Matching</a></li>
-            <li><a href="#"><span>📚</span> Course Marketplace</a></li>
-            <li><a href="#"><span>⚙️</span> Profile Settings</a></li>
-            <li><a href="login.html"><span>🚪</span> Logout</a></li>
+            <li class="active"><a href="#" style="color: #1976d2; font-weight: bold;"><span style="font-size: 1.3em;">🏠</span> Tableau de bord</a></li>
+            <li><a href="#"><span style="font-size: 1.3em;">🔍</span> Recherche de compétences</a></li>
+            <li><a href="marketplace.html"><span style="font-size: 1.3em;">🗂️</span> Marché des cours</a></li>
+            <li><a href="edit-profile.html"><span style="font-size: 1.3em;">⚙️</span> Paramètres du profil</a></li>
+            <li><a href="login.html"><span style="font-size: 1.3em;">📑</span> Déconnexion</a></li>
         </ul>
     </nav>
     <div class="main-content">
@@ -79,76 +102,64 @@
                     <div class="profile-avatar" id="dashboardAvatar">👤</div>
                     <div class="profile-info">
                         <h3 id="dashboardName">Alex Johnson</h3>
-                        <p id="dashboardJoin">Member since 2023</p>
+                        <p id="dashboardJoin">Membre depuis 2023</p>
                         <div class="profile-skills">
-                            <span class="section-label">SKILLS I OFFER</span>
-                            <span>JavaScript</span><span>React</span><span>UI Design</span>
+                            <span class="section-label">COMPÉTENCES QUE J'OFFRE</span>
+                            <div id="offeredSkills" class="skills-container">
+                                <!-- Skills will be dynamically inserted here -->
+                            </div>
                         </div>
                         <div class="profile-skills">
-                            <span class="section-label">SKILLS I WANT TO LEARN</span>
-                            <span class="learn">Python</span><span class="learn">Data Analysis</span><span class="learn">Public Speaking</span>
+                            <span class="section-label">COMPÉTENCES QUE JE VEUX APPRENDRE</span>
+                            <div id="wantedSkills" class="skills-container">
+                                <!-- Skills to learn will be dynamically inserted here -->
+                            </div>
                         </div>
-                        <a href="#" class="edit-link">Edit Profile</a>
+                        <a href="#" class="edit-link">Modifier le profil</a>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="section-title">Message Inbox</div>
+                    <div class="section-title">Boîte de réception</div>
                     <ul class="card-list">
-                        <li><span class="msg-user">Sarah Miller <span class="msg-dot">•</span></span> <span class="msg-time">10:30 AM</span><br>Looking forward to our session tomorrow!</li>
-                        <li><span class="msg-user">David Chen</span> <span class="msg-time">Yesterday</span><br>Thanks for the Python materials you shared.</li>
-                        <li><span class="msg-user">Emma Wilson <span class="msg-dot">•</span></span> <span class="msg-time">Yesterday</span><br>Can we reschedule our UI workshop?</li>
+                        <li><span class="msg-user">Sarah Miller <span class="msg-dot">•</span></span> <span class="msg-time">10:30</span><br>Hâte à notre session de demain !</li>
+                        <li><span class="msg-user">David Chen</span> <span class="msg-time">Hier</span><br>Merci pour les documents Python que tu as partagés.</li>
+                        <li><span class="msg-user">Emma Wilson <span class="msg-dot">•</span></span> <span class="msg-time">Hier</span><br>Pouvons-nous reprogrammer notre atelier UI ?</li>
                     </ul>
-                    <div class="dashboard-links"><a href="#">Open Messages</a></div>
+                    <div class="dashboard-links"><a href="#">Ouvrir les messages</a></div>
                 </div>
             </div>
             <div>
                 <div class="card">
-                    <div class="section-title">Upcoming Sessions</div>
+                    <div class="section-title">Sessions à venir</div>
                     <ul class="card-list">
-                        <li><span class="value">JavaScript Basics</span> <span class="badge teaching">Teaching</span><br><span class="label">With Sarah Miller</span> <br><span class="label">Mon, May 15, 2:00 PM</span></li>
-                        <li><span class="value">Python for Beginners</span> <span class="badge learning">Learning</span><br><span class="label">With David Chen</span> <br><span class="label">Wed, May 17, 10:00 AM</span></li>
-                        <li><span class="value">UI Design Workshop</span> <span class="badge teaching">Teaching</span><br><span class="label">With Emma Wilson</span> <br><span class="label">Sat, May 20, 3:30 PM</span></li>
+                        <li><span class="value">Bases de JavaScript</span> <span class="badge teaching">Enseignement</span><br><span class="label">Avec Sarah Miller</span> <br><span class="label">Lun, 15 mai, 14:00</span></li>
+                        <li><span class="value">Python pour débutants</span> <span class="badge learning">Apprentissage</span><br><span class="label">Avec David Chen</span> <br><span class="label">Mer, 17 mai, 10:00</span></li>
+                        <li><span class="value">Atelier UI Design</span> <span class="badge teaching">Enseignement</span><br><span class="label">Avec Emma Wilson</span> <br><span class="label">Sam, 20 mai, 15:30</span></li>
                     </ul>
-                    <div class="dashboard-links"><a href="#">View All Sessions</a> <a href="#">Schedule New</a></div>
+                    <div class="dashboard-links"><a href="#">Voir toutes les sessions</a> <a href="#">Planifier une session</a></div>
                 </div>
                 <div class="card">
-                    <div class="section-title">Reviews & Ratings</div>
+                    <div class="section-title">Avis & Notes</div>
                     <ul class="card-list">
                         <li class="review">
                             <div class="review-user">Michael Brown <span class="review-stars">★★★★★</span></div>
-                            <div class="review-text">Alex is an excellent JavaScript teacher. Very patient and knowledgeable.</div>
+                            <div class="review-text">Alex est un excellent professeur de JavaScript. Très patient et compétent.</div>
                         </li>
                         <li class="review">
                             <div class="review-user">Lisa Wang <span class="review-stars">★★★★☆</span></div>
-                            <div class="review-text">Great at explaining complex React concepts in simple terms.</div>
+                            <div class="review-text">Très bon pour expliquer les concepts React complexes simplement.</div>
                         </li>
                         <li class="review">
                             <div class="review-user">James Peterson <span class="review-stars">★★★★★</span></div>
-                            <div class="review-text">Helped me understand UI design principles quickly. Highly recommended!</div>
+                            <div class="review-text">M'a aidé à comprendre rapidement les principes du design UI. Je recommande !</div>
                         </li>
                     </ul>
-                    <div class="dashboard-links"><a href="#">View All Reviews</a></div>
+                    <div class="dashboard-links"><a href="#">Voir tous les avis</a></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script>
-// Récupère l'email du user connecté (stocké dans localStorage après login)
-const userEmail = localStorage.getItem('userEmail');
-if (!userEmail) {
-    window.location.href = 'login.html';
-}
-fetch(`/api/auth/user/me?email=${encodeURIComponent(userEmail)}`)
-    .then(res => res.ok ? res.json() : null)
-    .then(user => {
-        if (!user) return;
-        document.getElementById('dashboardUserName').textContent = user.nom + ' ' + user.prenom;
-        document.getElementById('dashboardName').textContent = user.nom + ' ' + user.prenom;
-        document.getElementById('dashboardHeaderAvatar').textContent = user.nom ? user.nom[0] : '👤';
-        document.getElementById('dashboardJoin').textContent = 'Member since ' + (user.dateNaissance ? new Date(user.dateNaissance).getFullYear() : '2023');
-        // Tu peux aussi remplir dynamiquement les skills, etc. ici
-    });
-</script>
+<script src="dashboard.js"></script>
 </body>
 </html> 
